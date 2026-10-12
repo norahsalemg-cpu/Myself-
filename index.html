@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>نوره الغانم | Norah Alghanim</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #F5F2ED;
+    --surface:   #FDFCFA;
+    --surface2:  #EDE8DF;
+    --text:      #1E1C18;
+    --text-muted:#6B6349;
+    --accent:    #3A5A40;
+    --accent-h:  #2D4730;
+    --warm:      #7A5C3A;
+    --line:      #D6CFC0;
+    --shadow:    0 1px 6px rgba(58,90,64,0.08);
+    --tag-bg:    #E4EDE5;
+    --tag-text:  #3A5A40;
+    --nav-h:     64px;
+  }
+
+  [data-theme="dark"] {
+    --bg:        #161411;
+    --surface:   #1F1C18;
+    --surface2:  #272319;
+    --text:      #EDE8DF;
+    --text-muted:#9E9275;
+    --accent:    #6A9B72;
+    --accent-h:  #87B58E;
+    --warm:      #C49A6C;
+    --line:      #35301F;
+    --shadow:    0 1px 8px rgba(0,0,0,0.35);
+    --tag-bg:    #253324;
+    --tag-text:  #87B58E;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-h) + env(safe-area-inset-top,0px));
+  }
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background .25s, color .25s;
+    padding-top: env(safe-area-inset-top,0px);
+    padding-bottom: env(safe-area-inset-bottom,0px);
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  body.en { direction: ltr; font-family: 'Lora', serif; }
+  body.en [data-ar] { display: none !important; }
+  body:not(.en) [data-en] { display: none !important; }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: env(safe-area-inset-top,0px);
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    height: var(--nav-h);
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+  }
+
+  .nav-id { line-height: 1.25; }
+
+  .nav-name {
+    font-family: 'Playfair Display', 'Tajawal', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    display: block;
+  }
+
+  .nav-sub {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    display: block;
+    letter-spacing: 0.2px;
+  }
+
+  .nav-right { display: flex; align-items: center; gap: 0.5rem; }
+
+  .nav-links { display: flex; gap: 2rem; margin-left: 2rem; margin-right: 2rem; }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: color .15s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .ctrl {
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--text-muted);
+    border-radius: 5px;
+    padding: .28rem .7rem;
+    font-size: .76rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    letter-spacing: .5px;
+    transition: all .15s;
+  }
+  .ctrl:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* LAYOUT */
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 2.2rem; }
+
+  /* HEADER */
+  .header {
+    padding: 5rem 0 4rem;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .header-main {}
+
+  .eyebrow {
+    font-size: .68rem;
+    font-weight: 700;
+    color: var(--warm);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', 'Tajawal', serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: .8rem;
+    letter-spacing: -.5px;
+  }
+
+  .header-sub {
+    font-size: .94rem;
+    color: var(--text-muted);
+    margin-bottom: 1.7rem;
+    font-weight: 400;
+    max-width: 50ch;
+    line-height: 1.7;
+  }
+
+  .header-bio {
+    font-size: .93rem;
+    color: var(--text);
+    max-width: 58ch;
+    line-height: 1.9;
+    margin-bottom: 2rem;
+  }
+
+  .btn-row { display: flex; gap: .7rem; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-block;
+    padding: .58rem 1.35rem;
+    border-radius: 5px;
+    font-size: .8rem;
+    font-weight: 700;
+    text-decoration: none;
+    font-family: inherit;
+    transition: all .15s;
+    cursor: pointer;
+    border: none;
+    letter-spacing: .3px;
+  }
+
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-h); }
+  .btn-outline { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+  .btn-outline:hover { background: var(--accent); color: #fff; }
+
+  /* divider */
+  .rule { border: none; border-top: 1px solid var(--line); }
+
+  /* SECTION */
+  .section { padding: 3rem 0; border-bottom: 1px solid var(--line); }
+
+  .sec-label {
+    font-size: .66rem;
+    font-weight: 700;
+    color: var(--warm);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: .35rem;
+  }
+
+  .sec-title {
+    font-family: 'Playfair Display', 'Tajawal', serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 1.6rem;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px,1fr));
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--line);
+    gap: 1px;
+  }
+
+  .skill-cell {
+    background: var(--surface);
+    padding: 1.2rem 1.5rem;
+  }
+
+  .skill-label {
+    font-size: .68rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: .65rem;
+  }
+
+  .tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+
+  .tag {
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    border-radius: 4px;
+    padding: .18rem .6rem;
+    font-size: .74rem;
+    font-weight: 500;
+  }
+
+  /* EDUCATION */
+  .edu-row {
+    display: flex;
+    gap: 1.4rem;
+    align-items: flex-start;
+  }
+
+  .edu-bar {
+    width: 3px;
+    min-height: 90px;
+    background: var(--accent);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .edu-degree {
+    font-weight: 700;
+    font-size: .98rem;
+    color: var(--text);
+    margin-bottom: .2rem;
+  }
+
+  .edu-school {
+    font-size: .88rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: .3rem;
+  }
+
+  .edu-meta { font-size: .8rem; color: var(--text-muted); }
+
+  /* PROJECT */
+  .proj-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--accent);
+  }
+
+  .proj-title {
+    font-family: 'Playfair Display', 'Tajawal', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: .6rem;
+    line-height: 1.4;
+  }
+
+  .proj-desc {
+    font-size: .88rem;
+    color: var(--text-muted);
+    line-height: 1.9;
+    margin-bottom: 1.2rem;
+    max-width: 62ch;
+  }
+
+  .proj-list {
+    list-style: none;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .proj-list li {
+    font-size: .86rem;
+    color: var(--text);
+    display: flex;
+    gap: .9rem;
+    align-items: flex-start;
+    padding: .55rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .proj-list li:last-child { border-bottom: none; }
+
+  .proj-list li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--warm);
+    flex-shrink: 0;
+    margin-top: .6rem;
+  }
+
+  .proj-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin-top: 1.3rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+    gap: .9rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 1.15rem 1.4rem;
+    text-decoration: none;
+    display: block;
+    transition: border-color .15s, box-shadow .15s;
+  }
+
+  .contact-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+
+  .contact-type {
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: .3rem;
+  }
+
+  .contact-val {
+    font-size: .86rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .cv-block {
+    background: var(--surface2);
+    border: 1px dashed var(--line);
+    border-radius: 7px;
+    padding: 1.4rem 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .cv-text { }
+  .cv-text strong { display: block; font-size: .92rem; color: var(--text); margin-bottom: .15rem; font-weight: 700; }
+  .cv-text span { font-size: .83rem; color: var(--text-muted); }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 0;
+    text-align: center;
+    font-size: .76rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--line);
+    margin-top: .5rem;
+    letter-spacing: .2px;
+  }
+
+  @media (max-width:600px) {
+    nav { padding: 0 1.2rem; }
+    .nav-links { display: none; }
+    .wrap { padding: 0 1.2rem; }
+    .header { grid-template-columns: 1fr; padding: 3rem 0 2.5rem; }
+    .header h1 { font-size: 2rem; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .proj-card { padding: 1.3rem; }
+    .cv-block { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-id">
+    <span class="nav-name" data-ar>نوره الغانم</span>
+    <span class="nav-name" data-en>Norah Alghanim</span>
+    <span class="nav-sub" data-ar>هندسة كهربائية — جامعة الملك فيصل</span>
+    <span class="nav-sub" data-en>Electrical Engineering — King Faisal University</span>
+  </div>
+  <div class="nav-right">
+    <nav class="nav-links">
+      <a href="#skills" data-ar>المهارات</a>
+      <a href="#skills" data-en>Skills</a>
+      <a href="#project" data-ar>المشروع</a>
+      <a href="#project" data-en>Project</a>
+      <a href="#internship" data-ar>التدريب</a>
+      <a href="#internship" data-en>Internship</a>
+      <a href="#contact" data-ar>التواصل</a>
+      <a href="#contact" data-en>Contact</a>
+    </nav>
+    <button class="ctrl" onclick="toggleLang()" id="langBtn">EN</button>
+    <button class="ctrl" onclick="toggleTheme()" id="themeBtn">Dark</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-main">
+      <p class="eyebrow" data-ar>بكالوريوس هندسة كهربائية — خريجة 2026</p>
+      <p class="eyebrow" data-en>Bachelor of Electrical Engineering — Graduate 2026</p>
+
+      <h1 data-ar>نوره الغانم</h1>
+      <h1 data-en>Norah Alghanim</h1>
+
+      <p class="header-sub" data-ar>خريجة قسم الهندسة الكهربائية من جامعة الملك فيصل، مع اهتمام بالأنظمة المدمجة وإلكترونيات القدرة وتطبيقات إنترنت الأشياء.</p>
+      <p class="header-sub" data-en>Graduate of the Electrical Engineering Department at King Faisal University, with a focus on embedded systems, power electronics, and IoT applications.</p>
+
+      <p class="header-bio" data-ar>
+        أتمت متطلبات درجة بكالوريوس الهندسة الكهربائية، وأنجزت مشروع التخرج الذي يمثّل تطبيقاً عملياً متكاملاً يجمع بين الأنظمة الإلكترونية والتحكم المدمج والاتصال اللاسلكي. تتمحور اهتماماتي حول تصميم الأنظمة الإلكترونية التي تربط الأجهزة بالبرمجيات في حلول قابلة للتطبيق الفعلي.
+      </p>
+      <p class="header-bio" data-en>
+        Having completed all requirements for the Bachelor of Electrical Engineering degree and finalized the graduation project, my focus lies in designing electronic systems that integrate hardware, embedded control, and wireless communication into practical, real-world solutions.
+      </p>
+
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#contact" data-ar>التواصل</a>
+        <a class="btn btn-primary" href="#contact" data-en>Contact</a>
+        <a class="btn btn-outline" href="#project" data-ar>مشروع التخرج</a>
+        <a class="btn btn-outline" href="#project" data-en>Graduation Project</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- SKILLS -->
+  <section class="section" id="skills">
+    <p class="sec-label" data-ar>المهارات</p>
+    <p class="sec-label" data-en>Skills</p>
+    <h2 class="sec-title" data-ar>الكفاءات التقنية والمهنية</h2>
+    <h2 class="sec-title" data-en>Technical & Professional Competencies</h2>
+
+    <div class="skills-grid">
+      <div class="skill-cell">
+        <p class="skill-label" data-ar>الدوائر والإلكترونيات</p>
+        <p class="skill-label" data-en>Circuits & Electronics</p>
+        <div class="tags">
+          <span class="tag" data-ar>تصميم الدوائر</span>
+          <span class="tag" data-en>Circuit Design</span>
+          <span class="tag" data-ar>إلكترونيات القدرة</span>
+          <span class="tag" data-en>Power Electronics</span>
+          <span class="tag" data-ar>المستشعرات</span>
+          <span class="tag" data-en>Sensors</span>
+        </div>
+      </div>
+      <div class="skill-cell">
+        <p class="skill-label" data-ar>أنظمة التحكم</p>
+        <p class="skill-label" data-en>Control Systems</p>
+        <div class="tags">
+          <span class="tag" data-ar>التحكم التلقائي</span>
+          <span class="tag" data-en>Automatic Control</span>
+          <span class="tag" data-ar>معالجة الإشارات</span>
+          <span class="tag" data-en>Signal Processing</span>
+        </div>
+      </div>
+      <div class="skill-cell">
+        <p class="skill-label" data-ar>المحاكاة والبرامج</p>
+        <p class="skill-label" data-en>Simulation & Software</p>
+        <div class="tags">
+          <span class="tag">MATLAB</span>
+          <span class="tag">Proteus</span>
+          <span class="tag">LTSpice</span>
+        </div>
+      </div>
+      <div class="skill-cell">
+        <p class="skill-label" data-ar>الأنظمة المدمجة</p>
+        <p class="skill-label" data-en>Embedded Systems</p>
+        <div class="tags">
+          <span class="tag">ESP32</span>
+          <span class="tag">Arduino</span>
+          <span class="tag">PWM</span>
+          <span class="tag">Wi-Fi</span>
+        </div>
+      </div>
+      <div class="skill-cell">
+        <p class="skill-label" data-ar>البحث والتوثيق</p>
+        <p class="skill-label" data-en>Research & Documentation</p>
+        <div class="tags">
+          <span class="tag" data-ar>الكتابة التقنية</span>
+          <span class="tag" data-en>Technical Writing</span>
+          <span class="tag" data-ar>التقارير الهندسية</span>
+          <span class="tag" data-en>Engineering Reports</span>
+        </div>
+      </div>
+      <div class="skill-cell">
+        <p class="skill-label" data-ar>المهارات المهنية</p>
+        <p class="skill-label" data-en>Professional Skills</p>
+        <div class="tags">
+          <span class="tag" data-ar>العمل الجماعي</span>
+          <span class="tag" data-en>Teamwork</span>
+          <span class="tag" data-ar>إدارة المشاريع</span>
+          <span class="tag" data-en>Project Management</span>
+          <span class="tag" data-ar>حل المشكلات</span>
+          <span class="tag" data-en>Problem Solving</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section" id="education">
+    <p class="sec-label" data-ar>التعليم</p>
+    <p class="sec-label" data-en>Education</p>
+    <h2 class="sec-title" data-ar>المؤهل الأكاديمي</h2>
+    <h2 class="sec-title" data-en>Academic Qualification</h2>
+
+    <div class="edu-row">
+      <div class="edu-bar"></div>
+      <div>
+        <p class="edu-degree" data-ar>بكالوريوس هندسة كهربائية</p>
+        <p class="edu-degree" data-en>Bachelor of Electrical Engineering</p>
+        <p class="edu-school" data-ar>جامعة الملك فيصل — الأحساء، المملكة العربية السعودية</p>
+        <p class="edu-school" data-en>King Faisal University — Al-Ahsa, Saudi Arabia</p>
+        <p class="edu-meta" data-ar>خريجة 2026</p>
+        <p class="edu-meta" data-en>Graduate, 2026</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT -->
+  <section class="section" id="project">
+    <p class="sec-label" data-ar>مشروع التخرج</p>
+    <p class="sec-label" data-en>Graduation Project</p>
+    <h2 class="sec-title" data-ar>المشروع المنجز</h2>
+    <h2 class="sec-title" data-en>Completed Project</h2>
+
+    <div class="proj-card">
+      <p class="proj-title" data-ar>جهاز تدريب أوزان ذكي بمقاومة مغناطيسية متغيرة</p>
+      <p class="proj-title" data-en>Smart Weight Training Device Using Magnetic Resistance</p>
+
+      <p class="proj-desc" data-ar>
+        نظام إلكتروني متكامل يعتمد على تقنية الكبح بالتيارات الدوامية لتغيير مقاومة الأوزان آلياً، بما يتيح محاكاة أي مستوى مقاومة بين 1 و30 كيلوغرام عبر جهاز واحد، بديلاً عن مجموعات الأثقال التقليدية.
+      </p>
+      <p class="proj-desc" data-en>
+        A fully integrated electronic system employing eddy current braking technology to automatically adjust weight resistance, enabling simulation of any load between 1 and 30 kg through a single device as an alternative to conventional dumbbell sets.
+      </p>
+
+      <ul class="proj-list" data-ar>
+        <li>توظيف متحكم ESP32 للتحكم في شدة المجال المغناطيسي عبر تعديل عرض النبضة (PWM)</li>
+        <li>تصميم واجهتي تحكم: يدوية عبر مقاومة متغيرة وأزرار، وأخرى عن بُعد عبر الشبكة اللاسلكية</li>
+        <li>دمج مستشعرات صحية لقياس معدل ضربات القلب ومستوى الأكسجين في الدم (SpO2) ودرجة حرارة الجسم</li>
+        <li>تطوير منظومة سلامة تشمل الكشف التلقائي عن السقوط وزر الإيقاف الطارئ والحماية من التحميل الزائد</li>
+        <li>تزويد الجهاز بشاشة LCD تعرض الوزن المختار وعدد التكرارات والمؤقت في الوقت الفعلي</li>
+      </ul>
+      <ul class="proj-list" data-en>
+        <li>Programmed the ESP32 microcontroller to regulate magnetic field intensity through Pulse Width Modulation (PWM)</li>
+        <li>Designed dual control interfaces: manual via potentiometer and buttons, and remote via Wi-Fi web interface</li>
+        <li>Integrated health monitoring sensors measuring heart rate, SpO2 blood oxygen level, and body temperature</li>
+        <li>Developed a safety system including automatic drop detection, emergency stop, and overload protection</li>
+        <li>Equipped the device with an LCD display showing selected weight, repetition count, and timer in real time</li>
+      </ul>
+
+      <div class="proj-tags">
+        <span class="tag">ESP32</span>
+        <span class="tag">PWM</span>
+        <span class="tag">Eddy Current Braking</span>
+        <span class="tag">IoT</span>
+        <span class="tag">Health Sensors</span>
+        <span class="tag">Wi-Fi Control</span>
+        <span class="tag">Embedded Systems</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERNSHIP -->
+  <section class="section" id="internship">
+    <p class="sec-label" data-ar>الفرص المهنية</p>
+    <p class="sec-label" data-en>Opportunities</p>
+    <h2 class="sec-title" data-ar>أبحث عن تدريب</h2>
+    <h2 class="sec-title" data-en>Seeking Internship</h2>
+
+    <div style="background:var(--surface);border:1px solid var(--line);border-right:4px solid var(--accent);border-radius:7px;padding:1.6rem 1.8rem;box-shadow:var(--shadow);">
+      <p style="font-size:.93rem;color:var(--text);line-height:1.9;margin-bottom:1rem;" data-ar>
+        بعد إتمام متطلبات درجة بكالوريوس الهندسة الكهربائية وإنجاز مشروع التخرج، أسعى حالياً للحصول على فرصة تدريب في بيئة هندسية احترافية تُتيح لي توظيف ما اكتسبته خلال مسيرتي الأكاديمية.
+      </p>
+      <p style="font-size:.93rem;color:var(--text);line-height:1.9;margin-bottom:1rem;" data-en>
+        Having completed my Bachelor of Electrical Engineering degree and graduation project, I am currently seeking an internship opportunity within a professional engineering environment where I can apply and further develop my technical knowledge.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.3rem;">
+        <span class="tag" data-ar>الأنظمة المدمجة</span>
+        <span class="tag" data-en>Embedded Systems</span>
+        <span class="tag" data-ar>إلكترونيات القدرة</span>
+        <span class="tag" data-en>Power Electronics</span>
+        <span class="tag" data-ar>إنترنت الأشياء</span>
+        <span class="tag" data-en>IoT</span>
+        <span class="tag" data-ar>أنظمة التحكم</span>
+        <span class="tag" data-en>Control Systems</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <p class="sec-label" data-ar>التواصل</p>
+    <p class="sec-label" data-en>Contact</p>
+    <h2 class="sec-title" data-ar>للتواصل والاستفسار</h2>
+    <h2 class="sec-title" data-en>Get in Touch</h2>
+
+    <div class="contact-grid">
+      <a class="contact-card" href="mailto:Norahsalemg@gmail.com">
+        <p class="contact-type" data-ar>البريد الإلكتروني</p>
+        <p class="contact-type" data-en>Email</p>
+        <p class="contact-val">Norahsalemg@gmail.com</p>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/norah-alghanim-2a6814234" target="_blank" rel="noopener">
+        <p class="contact-type">LinkedIn</p>
+        <p class="contact-val" data-ar>نوره الغانم</p>
+        <p class="contact-val" data-en>Norah Alghanim</p>
+      </a>
+    </div>
+
+    <div class="cv-block">
+      <div class="cv-text">
+        <strong data-ar>السيرة الذاتية</strong>
+        <strong data-en>Curriculum Vitae</strong>
+        <span data-ar>متاحة عند الطلب عبر البريد الإلكتروني.</span>
+        <span data-en>Available upon request via email.</span>
+      </div>
+      <a class="btn btn-outline" href="mailto:Norahsalemg@gmail.com?subject=طلب السيرة الذاتية" data-ar>طلب السيرة الذاتية</a>
+      <a class="btn btn-outline" href="mailto:Norahsalemg@gmail.com?subject=CV Request" data-en>Request CV</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p data-ar>نوره الغانم &nbsp;·&nbsp; قسم الهندسة الكهربائية &nbsp;·&nbsp; جامعة الملك فيصل &nbsp;·&nbsp; 2026</p>
+  <p data-en>Norah Alghanim &nbsp;·&nbsp; Department of Electrical Engineering &nbsp;·&nbsp; King Faisal University &nbsp;·&nbsp; 2026</p>
+</footer>
+
+<script>
+  let dark = false, en = false;
+
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    dark = true;
+    document.documentElement.setAttribute('data-theme','dark');
+    document.getElementById('themeBtn').textContent = 'Light';
+  }
+
+  function toggleTheme() {
+    dark = !dark;
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : '');
+    document.getElementById('themeBtn').textContent = dark ? 'Light' : 'Dark';
+  }
+
+  function toggleLang() {
+    en = !en;
+    document.body.classList.toggle('en', en);
+    document.documentElement.setAttribute('lang', en ? 'en' : 'ar');
+    document.documentElement.setAttribute('dir', en ? 'ltr' : 'rtl');
+    document.getElementById('langBtn').textContent = en ? 'عر' : 'EN';
+  }
+</script>
+</body>
+</html>
